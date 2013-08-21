@@ -59,7 +59,7 @@ public class Application extends Controller {
 
 			// Configure the execution context to generate a report...
 			executionContext.setEventListener(new HtmlReportGenerator(
-					"report.html"));
+					"logs/smooks-report.html"));
 
 			// Filter the input message to extract, using the execution
 			// context...
