@@ -1,0 +1,16 @@
+orders:
+
+- !!example.model.CustomerOrder
+     header: !!example.model.Header
+         date: 2002-08-15     
+         customerName: Joe
+         customerNumber: 123123 
+     orderItems:
+        - !!example.model.OrderItem
+           productId: 111
+           quantity: 2
+           price: 8.90
+        - !!example.model.OrderItem
+           productId: 100
+           quantity: 3
+           price: 3.90

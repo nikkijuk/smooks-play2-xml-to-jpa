@@ -1,0 +1,13 @@
+@(orders: List[example.model.CustomerOrder])
+
+@main("List of orders") {
+   
+   <h1>List of orders</h1>
+   
+     <ul>
+    @for(order <- orders){
+    	<li>@order.id @order.header.date @order.header.customerNumber @order.header.customerName </li>    	
+    }
+    </ul> 
+      
+}
