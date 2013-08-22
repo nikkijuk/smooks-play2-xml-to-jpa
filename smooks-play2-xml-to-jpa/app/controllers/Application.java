@@ -49,11 +49,13 @@ public class Application extends Controller {
 			SAXException, SmooksException {
 
 		// Instantiate Smooks with the config...
+		// smooks object is thread safe and should be normally cached
 		Smooks smooks = new Smooks("smooks-config.xml");
 
 		try {
 			// Create an exec context - no profiles....
 			ExecutionContext executionContext = smooks.createExecutionContext();
+			
 			// The result of this transform is a set of Java objects...
 			JavaResult result = new JavaResult();
 
@@ -79,18 +81,22 @@ public class Application extends Controller {
 			order = runSmooks(xml);
 			order.save();
 			return ok("Saved " + order.id);
-//		} catch (SmooksException sme) {
-//			String msg = "Unmarshalling failed :" + sme.getMessage();
-//			//Logger.error(msg, sme);
-//			return ok(msg);
-//		} catch (SAXException | IOException se) {
-//			String msg = "Smooks initialization failed :" + se.getMessage();
-//			//Logger.error(msg, se);
-//			return ok(msg);
+		} catch (SmooksException sme) {
+			String msg = "Unmarshalling failed :" + sme.getMessage();
+			Logger.error(msg, sme);
+			return internalServerError(msg);
+		} catch (SAXException se) {
+			String msg = "Smooks initialization error :" + se.getMessage();
+			Logger.error(msg, se);
+			return internalServerError(msg);
+		} catch (IOException  ioe) {
+			String msg = "Error reading config :" + ioe.getMessage();
+			Logger.error(msg, ioe);
+			return internalServerError(msg);
 		} catch (Exception e) {
 			String msg = "When all other fails :" + e.getMessage();
-			//Logger.error(msg, e);
-			return ok(msg);
+			Logger.error(msg, e);
+			return internalServerError(msg);
 		}
 	}
 
