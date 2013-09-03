@@ -13,7 +13,14 @@ object ApplicationBuild extends Build {
     // Smooks dependencies added
     "org.milyn" % "milyn-smooks-core" % "1.5.1",
     "org.milyn" % "milyn-smooks-javabean" % "1.5.1",
-      
+
+    // Webjars dependencies added 
+    "org.webjars" %% "webjars-play" % "2.1.0-3",
+    
+    // webjar components added	
+    "org.webjars" % "jquery" % "1.10.2",
+    "org.webjars" % "bootstrap" % "3.0.0",
+    
     javaCore,
     javaJdbc,
     javaEbean
